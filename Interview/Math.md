@@ -9,7 +9,8 @@
 
 **公式：**
 
-对于向量 $\vec{u}(x_1, y_1)$ 和 $\vec{v}(x_2, y_2)$，其 2D 叉乘（标量形式）为：$$\text{cross\_product} = x_1 y_2 - x_2 y_1$$
+对于向量 $\vec{u}(x_1, y_1)$ 和 $\vec{v}(x_2, y_2)$，其 2D 叉乘（标量形式）为：
+$$\text{cross\_product} = x_1 y_2 - x_2 y_1$$
 
 
 **纯 C++ 实现**

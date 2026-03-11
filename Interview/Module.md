@@ -5,6 +5,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)
 
 其中每一路 Head 的计算公式为：
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
 -----
 **核心步骤拆解**
 1. Linear Projection: 把输入映射到 $Q, K, V$。
@@ -12,7 +13,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)
 3. Scaled Dot-Product: 计算注意力权重并加权。
 4. Concatenation: 合并所有头并经过最后的线性层。
 ----
-Pytorch 手撕版，重点在于 view 和 transpose 的配合
+Pytorch 手撕版：重点在于 view 和 transpose 的配合
 ```python
 import torch
 import torch.nn as nn
