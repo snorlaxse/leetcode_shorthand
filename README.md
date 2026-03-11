@@ -62,7 +62,7 @@
 | --- | --- | --- | --- |
 | **链表** | 2. 两数相加 | [Link](https://leetcode.cn/problems/add-two-numbers/) | **模拟竖式加法**：逐位相加+进位，边算边建新链表。 |
 | **链表** | 19. 删除链表的倒数第 N 个结点 | [Link](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/) | **快慢指针**：快指针先走 N 步，再同步走到尾，慢指针定位待删前驱。 |
-| **链表** | 21. 合并两个有序链表 | [Link](https://leetcode.cn/problems/merge-two-sorted-lists/) | **双指针归并**：像归并排序合并过程，串起较小节点。 |
+| **链表** | 21. 合并两个有序链表 | [Link](https://leetcode.cn/problems/merge-two-sorted-lists/) | **双指针归并**：新建空头节点，其后仅依次连接较小的值（双指针依次比较） |
 | **链表** | 23. 合并 K 个升序链表 | [Link](https://leetcode.cn/problems/merge-k-sorted-lists/) | **小根堆**：堆存各链表头结点，反复取最小并推进该链表。 |
 | **链表** | 141. 环形链表 | [Link](https://leetcode.cn/problems/linked-list-cycle/) | **快慢指针**：有环则必相遇。 |
 | **链表** | 142. 环形链表 II | [Link](https://leetcode.cn/problems/linked-list-cycle-ii/) | **数学推导**：相遇后一指针回头，同速前进再相遇于入环点。 |
@@ -96,6 +96,7 @@
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **图论** | 200. 岛屿数量 | [Link](https://leetcode.cn/problems/number-of-islands/) | **DFS/BFS**：遇到陆地就淹没整块连通区域并计数。 |
+| **图论** | 994. 腐烂的橘子 | [Link](https://leetcode.cn/problems/rotting-oranges/) | **BFS**: 计数新鲜橘子，BFS结束后 按照是否有剩余新鲜橘子，返回输出；特例：fresh == 0, 直接返回0，不是-1|
 | **图论** | 207. 课程表 | [Link](https://leetcode.cn/problems/course-schedule/) | **拓扑排序**：入度+队列；或 DFS 判环。 |
 | **图论** | 399. 除法求值 | [Link](https://leetcode.cn/problems/evaluate-division/) | **建图+搜索**：边权为倍数，DFS/BFS 求路径乘积；或并查集带权。 |
 
@@ -117,6 +118,7 @@
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **二分查找** | 4. 寻找两个正序数组的中位数 | [Link](https://leetcode.cn/problems/median-of-two-sorted-arrays/) | **二分切分**：在较短数组二分切分点，使左半最大 ≤ 右半最小。 |
+| **二分查找** | 74. 搜索二维矩阵 | [Link](https://leetcode.cn/problems/search-a-2d-matrix/) | 从"左下角"/"右上角"开始对比 |
 | **二分查找** | 33. 搜索旋转排序数组 | [Link](https://leetcode.cn/problems/search-in-rotated-sorted-array/) | **二分**：判断哪半段有序，再决定丢弃另一半。 |
 | **二分查找** | 34. 在排序数组中查找元素的第一个和最后一个位置 | [Link](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/) | **二分两次**：分别找 lower_bound 与 upper_bound-1。 |
 
@@ -125,7 +127,7 @@
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **栈** | 20. 有效的括号 | [Link](https://leetcode.cn/problems/valid-parentheses/) | **栈匹配**：遇左括号入栈，遇右括号检查栈顶是否匹配。 |
-| **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **栈**：遇 `]` 出栈拼接；或递归按语法解析 `k[substr]`。 |
+| **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **双栈模拟**：遇 `[`，将积累的数字、(位于数字前的)字符串(初始化为"")均压栈；遇 `]`，出栈拼接，此时未压栈的积累的字符串 可被栈顶数字多次重复，再与作为前缀的栈顶字符串拼接|
 
 ## 单调栈
 
