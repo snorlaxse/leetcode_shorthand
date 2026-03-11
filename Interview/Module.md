@@ -1,6 +1,8 @@
 ### 多头注意力
+
 核心公式：
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)W^O$$
+
 其中每一路 Head 的计算公式为：
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 -----
