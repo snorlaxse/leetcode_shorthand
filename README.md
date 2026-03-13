@@ -135,8 +135,8 @@
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **栈** | 20. 有效的括号 | [Link](https://leetcode.cn/problems/valid-parentheses/) | **栈匹配**：遇左括号入栈，遇右括号检查栈顶是否匹配。 |
-| **设计** | 155. 最小栈 | [Link](https://leetcode.cn/problems/min-stack/) | **辅助栈**：同步保存当前最小值，实现 O(1) getMin。 |
+| **栈** | 20. 有效的括号 | [Link](https://leetcode.cn/problems/valid-parentheses/) | **栈匹配**：遇左括号入栈，遇右括号检查栈顶是否匹配, 不符则直接false |
+| **设计** | 155. 最小栈 | [Link](https://leetcode.cn/problems/min-stack/) | **辅助栈**：普通栈st + 非严格递减栈minSt（当前值不大于栈顶值则可入栈， 弹出值与栈顶值一致则出栈） |
 | **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **双栈模拟**：遇 `[`，将积累的数字、(位于数字前的)字符串(初始化为"")均压栈；遇 `]`，出栈拼接，此时未压栈的积累的字符串 可被栈顶数字多次重复，再与作为前缀的栈顶字符串拼接|
 | **单调栈** | 739. 每日温度 | [Link](https://leetcode.cn/problems/daily-temperatures/) | **单调递减栈**：栈存索引，遇更高温度出栈计算间隔。 |
 | **单调栈** | 84. 柱状图中最大的矩形 | [Link](https://leetcode.cn/problems/largest-rectangle-in-histogram/) | **单调递增栈**：出栈时计算以该高度为最矮的最大宽度。 |
