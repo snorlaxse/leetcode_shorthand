@@ -99,9 +99,10 @@
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **图论** | 200. 岛屿数量 | [Link](https://leetcode.cn/problems/number-of-islands/) | **DFS/BFS**：遇到陆地就淹没整块连通区域并计数。 |
-| **图论** | 994. 腐烂的橘子 | [Link](https://leetcode.cn/problems/rotting-oranges/) | **BFS**: 计数新鲜橘子，BFS结束后 按照是否有剩余新鲜橘子，返回输出；特例：fresh == 0, 直接返回0，不是-1|
-| **图论** | 207. 课程表 | [Link](https://leetcode.cn/problems/course-schedule/) | **拓扑排序**：入度+队列；或 DFS 判环。 |
+| **图论** | 200. 岛屿数量 | [Link](https://leetcode.cn/problems/number-of-islands/) | **DFS**：遇到陆地就淹没整块连通区域并计数 |
+| **图论** | 994. 腐烂的橘子 | [Link](https://leetcode.cn/problems/rotting-oranges/) | **BFS**: 计数新鲜橘子，BFS结束后 按照是否有剩余新鲜橘子，返回输出；特例：fresh == 0, 直接返回0，不是-1 |
+| **图论** | 207. 课程表 | [Link](https://leetcode.cn/problems/course-schedule/) | **拓扑排序**：维护入度&后置课程 + BFS队列（按步更新），最后判断`已修课程数==全部课程数` |
+| **设计** | 208. 实现Trie (前缀树) | [Link](https://leetcode.cn/problems/implement-trie-prefix-tree/) | **字典树**：节点存`子指针数组(26)`与`单词结束标记`(支持前缀查询) |
 | **图论** | 399. 除法求值 | [Link](https://leetcode.cn/problems/evaluate-division/) | **建图+搜索**：边权为倍数，DFS/BFS 求路径乘积；或并查集带权。 |
 
 
@@ -109,37 +110,37 @@
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **回溯** | 17. 电话号码的字母组合 | [Link](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/) | **回溯枚举**：按位选字母，递归构造所有组合。 |
-| **回溯** | 22. 括号生成 | [Link](https://leetcode.cn/problems/generate-parentheses/) | **回溯剪枝**：左括号可用则加；右括号数 < 左括号数才可加。 |
-| **回溯** | 39. 组合总和 | [Link](https://leetcode.cn/problems/combination-sum/) | **回溯**：可重复选同元素，控制起点避免排列重复。 |
-| **回溯** | 46. 全排列 | [Link](https://leetcode.cn/problems/permutations/) | **回溯**：`used` 标记选择状态，逐位填充。 |
-| **回溯** | 78. 子集 | [Link](https://leetcode.cn/problems/subsets/) | **回溯/迭代**：每个元素选/不选；或逐步扩展结果集。 |
-| **回溯** | 79. 单词搜索 | [Link](https://leetcode.cn/problems/word-search/) | **DFS 回溯**：网格四方向搜索，访问标记+回退。 |
+| **回溯** | 46. 全排列 | [Link](https://leetcode.cn/problems/permutations/) | **回溯**：全局`used_set` 标记选择状态（避免重复），逐位填充 |
+| **回溯** | 78. 子集 | [Link](https://leetcode.cn/problems/subsets/) | **回溯**：基于startIndex（不走回头路），逐步扩展结果集 |
+| **回溯** | 39. 组合总和 | [Link](https://leetcode.cn/problems/combination-sum/) | **回溯**：可重复选同元素，基于startIndex控制起点避免排列重复（产出具体排列，不可使用dp） |
+| **回溯** | 131. 分割回文串 | [Link](https://leetcode.cn/problems/palindrome-partitioning/) | **回溯**：startIndex + is_valid() 切分 |
+| **回溯** | 17. 电话号码的字母组合 | [Link](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/) | **回溯**：按位选（string数组存的）字母，递归构造所有组合（不考虑重复问题） |
+| **回溯** | 22. 括号生成 | [Link](https://leetcode.cn/problems/generate-parentheses/) | **回溯**：加左右括号后，判断 (左括号数是否超限) && (右括号数 <= 左括号数) |
+| **回溯** | 79. 单词搜索 | [Link](https://leetcode.cn/problems/word-search/) | **回溯**：网格四方向搜索，访问标记+回退 |
+| **回溯** | 51. N 皇后 | [Link](https://leetcode.cn/problems/n-queens/) | **回溯**：col(n) + dg&udg(2n) + path('.') |
 | **回溯** | 301. 删除无效的括号 | [Link](https://leetcode.cn/problems/remove-invalid-parentheses/) | **BFS/回溯剪枝**：最少删除；BFS 按层保证最优，去重。 |
 
 ## 二分查找
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **二分查找** | 4. 寻找两个正序数组的中位数 | [Link](https://leetcode.cn/problems/median-of-two-sorted-arrays/) | **二分切分**：在较短数组二分切分点，使左半最大 ≤ 右半最小。 |
+| **二分查找** | 35. 搜索插入位置 | [Link](https://leetcode.cn/problems/search-insert-position/) | **二分**：l = mid + 1, r = mid -1, 取l |
 | **二分查找** | 74. 搜索二维矩阵 | [Link](https://leetcode.cn/problems/search-a-2d-matrix/) | 从"左下角"/"右上角"开始对比 |
-| **二分查找** | 33. 搜索旋转排序数组 | [Link](https://leetcode.cn/problems/search-in-rotated-sorted-array/) | **二分**：判断哪半段有序，再决定丢弃另一半。 |
-| **二分查找** | 34. 在排序数组中查找元素的第一个和最后一个位置 | [Link](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/) | **二分两次**：分别找 lower_bound 与 upper_bound-1。 |
+| **二分查找** | 34. 在`排序`数组中查找元素的第一个和最后一个位置 | [Link](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/) | **二分两次**：第一个位置：记录找到的target，把 high 移到 mid - 1，看看左边还有没有； 最后一个位置：记录找到的target，把 low 移到 mid + 1，看看右边还有没有|
+| **二分查找** | 33. 搜索旋转`排序`数组 | [Link](https://leetcode.cn/problems/search-in-rotated-sorted-array/) | **二分**：基于有序的半段 nums[mid] >= nums[l]， 判断target是否在区间内 |
+| **二分查找** | 153. 寻找旋转`排序`数组中的最小值 | [Link](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/) | **二分**：与nums[r]比较，找到 小于nums[r] 的 最小值 |
+| **二分查找** | 4. 寻找两个`正序`数组的中位数 | [Link](https://leetcode.cn/problems/median-of-two-sorted-arrays/) | **子二分**：在`较短`数组二分切分点(最小化二分范围)，使两个数组的左半最大(nums1[i-1], num2[j-1]) 均小于等于 两个数组的右半最小（nums1[i], num2[j]）|
 
 ## 栈
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **栈** | 20. 有效的括号 | [Link](https://leetcode.cn/problems/valid-parentheses/) | **栈匹配**：遇左括号入栈，遇右括号检查栈顶是否匹配。 |
+| **设计** | 155. 最小栈 | [Link](https://leetcode.cn/problems/min-stack/) | **辅助栈**：同步保存当前最小值，实现 O(1) getMin。 |
 | **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **双栈模拟**：遇 `[`，将积累的数字、(位于数字前的)字符串(初始化为"")均压栈；遇 `]`，出栈拼接，此时未压栈的积累的字符串 可被栈顶数字多次重复，再与作为前缀的栈顶字符串拼接|
-
-## 单调栈
-
-| 分类 | 题目 | 链接 | 核心解法思路 |
-| --- | --- | --- | --- |
+| **单调栈** | 739. 每日温度 | [Link](https://leetcode.cn/problems/daily-temperatures/) | **单调递减栈**：栈存索引，遇更高温度出栈计算间隔。 |
 | **单调栈** | 84. 柱状图中最大的矩形 | [Link](https://leetcode.cn/problems/largest-rectangle-in-histogram/) | **单调递增栈**：出栈时计算以该高度为最矮的最大宽度。 |
 | **单调栈** | 85. 最大矩形 | [Link](https://leetcode.cn/problems/maximal-rectangle/) | **转化为 84**：逐行累积高度，行内用单调栈求最大矩形。 |
-| **单调栈** | 739. 每日温度 | [Link](https://leetcode.cn/problems/daily-temperatures/) | **单调递减栈**：栈存索引，遇更高温度出栈计算间隔。 |
 
 ## 堆
 
@@ -196,13 +197,6 @@
 | **位运算** | 136. 只出现一次的数字 | [Link](https://leetcode.cn/problems/single-number/) | **异或**：成对抵消，剩下的就是答案。 |
 | **位运算** | 338. 比特位计数 | [Link](https://leetcode.cn/problems/counting-bits/) | **DP**：`dp[i]=dp[i>>1]+(i&1)` 或 `dp[i]=dp[i&(i-1)]+1`。 |
 | **位运算** | 461. 汉明距离 | [Link](https://leetcode.cn/problems/hamming-distance/) | **异或+计数**：`x^y` 后统计 1 的个数（`x&=x-1`）。 |
-
-## 设计
-
-| 分类 | 题目 | 链接 | 核心解法思路 |
-| --- | --- | --- | --- |
-| **设计** | 155. 最小栈 | [Link](https://leetcode.cn/problems/min-stack/) | **辅助栈**：同步保存当前最小值，实现 O(1) getMin。 |
-| **设计** | 208. 实现 Trie (前缀树) | [Link](https://leetcode.cn/problems/implement-trie-prefix-tree/) | **字典树**：节点存子指针与单词结束标记，支持前缀查询。 |
 
 
 ## 字符串
