@@ -16,8 +16,6 @@
 | **双指针** | 11. 盛最多水的容器 | [Link](https://leetcode.cn/problems/container-with-most-water/) | **左右指针**：每次移动短板（面积上界由短板决定） |
 | **双指针** | 15. 三数之和 | [Link](https://leetcode.cn/problems/3sum/) | **排序+双指针**：先整体排序；固定一个数，剩余用夹逼；跳过重复|
 | **双指针** | 42. 接雨水 | [Link](https://leetcode.cn/problems/trapping-rain-water/) | **双指针/单调栈**：递减栈找“凹槽”计算新增水量 |
-| **双指针** | 75. 颜色分类 | [Link](https://leetcode.cn/problems/sort-colors/) | **三指针**：荷兰国旗，`0` 放左、`2` 放右、`1` 留中间 |
-| **双指针** | 287. 寻找重复数 | [Link](https://leetcode.cn/problems/find-the-duplicate-number/) | **快慢指针找环**：把数组视作指针映射，入环点是重复数 |
 
 ## 滑动窗口
 
@@ -43,6 +41,8 @@
 | **技巧反转** | 189. 轮转数组 | [Link](https://leetcode.cn/problems/rotate-array/) | 整体反转 + （前&后）区间反转 |
 | **数组** | 238. 除自身以外数组的乘积 | [Link](https://leetcode.cn/problems/product-of-array-except-self/) | **前后缀乘积**：两次遍历`ans[i]*=prefix_product`，`ans[i]*=suffix_product`，O(1) 额外空间可行|
 | **数组** | 41. 缺失的第一个正数 | [Link](https://leetcode.cn/problems/first-missing-positive/) | **原地哈希**：数值即下标，把数值放到对应的下标位置；第二次遍历，找到不符合预期的位置|
+| **数组** | 448. 找到所有数组中消失的数字 | [Link](https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/) | **原地标记**：把 `nums[abs(x)-1]` 置负，未被标记的位置即缺失。 |
+| **数组** | 581. 最短无序连续子数组 | [Link](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/) | **一次扫描**：从左维护最大、从右维护最小，定位左右边界。 |
 
 ## 矩阵
 
@@ -137,26 +137,29 @@
 | --- | --- | --- | --- |
 | **栈** | 20. 有效的括号 | [Link](https://leetcode.cn/problems/valid-parentheses/) | **栈匹配**：遇左括号入栈，遇右括号检查栈顶是否匹配, 不符则直接false |
 | **设计** | 155. 最小栈 | [Link](https://leetcode.cn/problems/min-stack/) | **辅助栈**：普通栈st + 非严格递减栈minSt（当前值不大于栈顶值则可入栈， 弹出值与栈顶值一致则出栈） |
-| **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **双栈模拟**：遇 `[`，将积累的数字、(位于数字前的)字符串(初始化为"")均压栈；遇 `]`，出栈拼接，此时未压栈的积累的字符串 可被栈顶数字多次重复，再与作为前缀的栈顶字符串拼接|
-| **单调栈** | 739. 每日温度 | [Link](https://leetcode.cn/problems/daily-temperatures/) | **单调递减栈**：栈存索引，遇更高温度出栈计算间隔。 |
-| **单调栈** | 84. 柱状图中最大的矩形 | [Link](https://leetcode.cn/problems/largest-rectangle-in-histogram/) | **单调递增栈**：出栈时计算以该高度为最矮的最大宽度。 |
+| **栈** | 394. 字符串解码 | [Link](https://leetcode.cn/problems/decode-string/) | **双栈模拟**：遇 `[`，将积累的数字、(位于数字前的)字符串(初始化为"")分别压两个栈；遇 `]`，出栈拼接，此时未压栈的积累的字符串 可被栈顶数字多次重复，再与作为前缀的栈顶字符串拼接|
+| **单调栈** | 739. 每日温度 | [Link](https://leetcode.cn/problems/daily-temperatures/) | **单调递减栈**：栈存索引，遇更高温度出栈计算间隔 |
+| **单调栈** | 84. 柱状图中最大的矩形 | [Link](https://leetcode.cn/problems/largest-rectangle-in-histogram/) | **单调递增栈**：数组尾部+0，确保清空栈；出栈时计算以该高度为最矮的最大宽度 i-st.top()-1 <br>PS: 反向接雨水 |
 | **单调栈** | 85. 最大矩形 | [Link](https://leetcode.cn/problems/maximal-rectangle/) | **转化为 84**：逐行累积高度，行内用单调栈求最大矩形。 |
 
 ## 堆
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **堆** | 215. 数组中的第K个最大元素 | [Link](https://leetcode.cn/problems/kth-largest-element-in-an-array/) | **堆/快速选择**：小根堆保留 K 个；或 quickselect 平均 O(n)。 |
+| **堆** | 215. 数组中的第K个最大元素 | [Link](https://leetcode.cn/problems/kth-largest-element-in-an-array/) | **堆**：小根堆保留 K 个；<br> **快速选择**：quickselect 平均 O(n)。 |
+| **堆** | 347. 前 K 个高频元素 | [Link](https://leetcode.cn/problems/top-k-frequent-elements/) | **哈希+堆**：统计频次，用大小为 K 的小根堆筛选 |
+| **堆** | 295. 数据流的中位数 | [Link](https://leetcode.cn/problems/find-median-from-data-stream/) | **大根堆+小根堆**：新增数值进大根堆 → 大根堆堆顶进小根堆 → 若小根堆数量多，则小根堆堆顶进大根堆 (保证奇数中位数位于大根堆堆顶)；<br>取中位数，按照两个堆数量判断奇偶数，若是奇数则取大根堆堆顶，若是偶数则取两个堆顶的平均值 |
 | **堆** | 253. 会议室 II | [Link](https://leetcode.cn/problems/meeting-rooms-ii/) | **最小堆**：按开始时间排序，堆顶是最早结束；能复用就弹出。 |
-| **堆** | 347. 前 K 个高频元素 | [Link](https://leetcode.cn/problems/top-k-frequent-elements/) | **哈希+堆**：统计频次，用大小为 K 的小根堆筛选。 |
 
 
 ## 贪心
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
-| **贪心** | 55. 跳跃游戏 | [Link](https://leetcode.cn/problems/jump-game/) | **贪心**：维护当前能到的最远位置 `far`，遍历更新。 |
-| **贪心** | 121. 买卖股票的最佳时机 | [Link](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) | **一次遍历**：维护历史最低价，更新最大利润。 |
+| **贪心** | 121. 买卖股票的最佳时机 | [Link](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) | **一次遍历**：维护历史最低价，更新最大利润 |
+| **贪心** | 55. 跳跃游戏 | [Link](https://leetcode.cn/problems/jump-game/) | **贪心**：维护当前能到的最远位置 `far`，遍历更新，可提前剪枝返回 |
+| **贪心** | 45. 跳跃游戏 II | [Link](https://leetcode.cn/problems/jump-game-ii/) | **贪心**：维护当前的最远位置 和 下一步可达的最远距离，遍历更新，可提前剪枝返回 |
+| **贪心** | 763. 划分字母区间 | [Link](https://leetcode.cn/problems/partition-labels/) | **贪心**：先遍历，记录每个字母的最远距离；滑动窗口 记录窗口内的综合最远距离，到达后置零，继续迭代 |
 | **贪心** | 406. 根据身高重建队列 | [Link](https://leetcode.cn/problems/queue-reconstruction-by-height/) | **排序+插入**：身高降序、k 升序，然后按 k 位置插入。 |
 | **贪心** | 621. 任务调度器 | [Link](https://leetcode.cn/problems/task-scheduler/) | **计数/公式**：由最高频任务决定骨架，答案为 `max(nTasks, (maxCnt-1)*(n+1)+numMax)`。 |
 
@@ -164,51 +167,54 @@
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
+| **动态规划** | 70. 爬楼梯 | [Link](https://leetcode.cn/problems/climbing-stairs/) | **斐波那契**：`dp[i]=dp[i-1]+dp[i-2]` |
+| **动态规划** | 118. 杨辉三角 | [Link](https://leetcode.cn/problems/pascals-triangle/) | **递推公式**：`ans[i][j] = ans[i - 1][j - 1] + ans[i - 1][j];` |
+| **动态规划** | 198. 打家劫舍 | [Link](https://leetcode.cn/problems/house-robber/) | **DP**：`dp[i]=max(dp[i-1],nums[i]+dp[i-2])`。 |
+| **动态规划** | 279. 完全平方数 | [Link](https://leetcode.cn/problems/perfect-squares/) | **完全背包 DP**：`dp[i]=min(dp[i],dp[i- j*j]+1)` |
+| **动态规划** | 322. 零钱兑换 | [Link](https://leetcode.cn/problems/coin-change/) | **完全背包 DP**：`dp[i]=min(dp[i],dp[i-coin]+1)`；初始化无穷大，最后判断是否可完成兑换 |
+| **动态规划** | 139. 单词拆分 | [Link](https://leetcode.cn/problems/word-break/) | **哈希查询+DP**：`dp[i]` 表示前 i 可拆：if(wordSet.count(t) && dp[j - 1]) dp[i] = true; |
+| **动态规划** | 300. 最长递增子序列 | [Link](https://leetcode.cn/problems/longest-increasing-subsequence/) | **DP**：$dp[i] = \max(dp[i], dp[j] + 1)$，全局更新res<br>**贪心+二分**：维护 `tails`，对每个数二分替换位置 |
+| **动态规划** | 152. 乘积最大子数组 | [Link](https://leetcode.cn/problems/maximum-product-subarray/) | **DP**：同时维护当前位置最大/最小乘积（负数会翻转），全局更新res |
+| **动态规划** | 416. 分割等和子集 | [Link](https://leetcode.cn/problems/partition-equal-subset-sum/) | **0/1 背包**：目标为总和一半，`dp[i]=dp[i]||dp[i-num]` |
+| **动态规划** | 32. 最长有效括号 | [Link](https://leetcode.cn/problems/longest-valid-parentheses/) | **DP**：`dp[i]` 即以i结尾的有效长度; dp[i] = dp[i - 2] + 2 (+ dp[i - 2 - dp[i - 1]]) |
 | **动态规划** | 10. 正则表达式匹配 | [Link](https://leetcode.cn/problems/regular-expression-matching/) | **DP**：`dp[i][j]` 表示前缀匹配；重点处理 `*` 的 0 次/多次转移。 |
-| **动态规划** | 32. 最长有效括号 | [Link](https://leetcode.cn/problems/longest-valid-parentheses/) | **DP/栈**：常用 `dp[i]` 以 i 结尾长度；或栈存索引求区间。 |
-| **动态规划** | 62. 不同路径 | [Link](https://leetcode.cn/problems/unique-paths/) | **DP**：`dp[i][j]=dp[i-1][j]+dp[i][j-1]`。 |
-| **动态规划** | 64. 最小路径和 | [Link](https://leetcode.cn/problems/minimum-path-sum/) | **DP**：`dp[i][j]=min(上,左)+grid[i][j]`，可原地滚动。 |
-| **动态规划** | 70. 爬楼梯 | [Link](https://leetcode.cn/problems/climbing-stairs/) | **斐波那契**：`dp[i]=dp[i-1]+dp[i-2]`，滚动变量。 |
-| **动态规划** | 72. 编辑距离 | [Link](https://leetcode.cn/problems/edit-distance/) | **二维 DP**：插入/删除/替换三种操作取最小，注意边界初始化。 |
 | **动态规划** | 96. 不同的二叉搜索树 | [Link](https://leetcode.cn/problems/unique-binary-search-trees/) | **Catalan DP**：`dp[n]=Σ dp[i-1]*dp[n-i]`。 |
-| **动态规划** | 139. 单词拆分 | [Link](https://leetcode.cn/problems/word-break/) | **DP**：`dp[i]` 表示前 i 可拆；枚举切分点+字典集合。 |
-| **动态规划** | 152. 乘积最大子数组 | [Link](https://leetcode.cn/problems/maximum-product-subarray/) | **DP**：同时维护当前位置最大/最小乘积（负数会翻转）。 |
-| **动态规划** | 198. 打家劫舍 | [Link](https://leetcode.cn/problems/house-robber/) | **DP**：`dp[i]=max(dp[i-1],dp[i-2]+nums[i])`。 |
 | **动态规划** | 221. 最大正方形 | [Link](https://leetcode.cn/problems/maximal-square/) | **DP**：`dp[i][j]=min(上,左,左上)+1`（当该格为 1）。 |
-| **动态规划** | 279. 完全平方数 | [Link](https://leetcode.cn/problems/perfect-squares/) | **完全背包 DP**：`dp[i]=min(dp[i],dp[i-sq]+1)`。 |
-| **动态规划** | 300. 最长递增子序列 | [Link](https://leetcode.cn/problems/longest-increasing-subsequence/) | **贪心+二分**：维护 `tails`，对每个数二分替换位置。 |
 | **动态规划** | 309. 最佳买卖股票时机含冷冻期 | [Link](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/) | **状态机 DP**：持有/卖出/冷冻（或 rest），按天转移。 |
 | **动态规划** | 312. 戳气球 | [Link](https://leetcode.cn/problems/burst-balloons/) | **区间 DP**：枚举最后戳破的气球 k，`dp[l][r]=max(dp[l][k]+dp[k][r]+gain)`。 |
-| **动态规划** | 322. 零钱兑换 | [Link](https://leetcode.cn/problems/coin-change/) | **完全背包**：`dp[i]=min(dp[i],dp[i-coin]+1)`，初始化无穷大。 |
 | **动态规划** | 337. 打家劫舍 III | [Link](https://leetcode.cn/problems/house-robber-iii/) | **树形 DP**：每节点返回选/不选两种收益。 |
-| **动态规划** | 416. 分割等和子集 | [Link](https://leetcode.cn/problems/partition-equal-subset-sum/) | **0/1 背包**：目标为总和一半，`dp[j]=dp[j]||dp[j-num]`。 |
 | **动态规划** | 494. 目标和 | [Link](https://leetcode.cn/problems/target-sum/) | **转化背包**：转为求子集和 \( (sum+target)/2 \) 的方案数。 |
 
 ## 多维动态规划
 
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
+| **动态规划** | 62. 不同路径 | [Link](https://leetcode.cn/problems/unique-paths/) | **DP**：`dp[i][j]=dp[i-1][j]+dp[i][j-1]`。 |
+| **动态规划** | 64. 最小路径和 | [Link](https://leetcode.cn/problems/minimum-path-sum/) | **DP**：`dp[i][j]=min(上,左)+grid[i][j]`，可原地滚动。 |
 | **字符串** | 5. 最长回文子串 | [Link](https://leetcode.cn/problems/longest-palindromic-substring/) | **中心扩展**：枚举中心（奇/偶），向两侧扩展取最长。 |
+| **字符串** | 1143. 最长公共子序列 | [Link](https://leetcode.cn/problems/longest-common-subsequence/) | **DP**：text1[i]与text2[j]相等时，`dp[i][j] = dp[i - 1][j - 1] + 1;`；否则，`dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);` |
+| **动态规划** | 72. 编辑距离 | [Link](https://leetcode.cn/problems/edit-distance/) | **二维 DP**：text1[i]与text2[j]相等时， dp[i][j] = dp[i-1][j-1]；否则，插入[i-1][j]/删除[i][j-1]/替换[i-1][j-1]三种操作取最小 + 1；注意边界初始化 |
 
-## 位运算
 
+## 技巧
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **位运算** | 136. 只出现一次的数字 | [Link](https://leetcode.cn/problems/single-number/) | **异或**：成对抵消，剩下的就是答案。 |
+| **数组** | 169. 多数元素 | [Link](https://leetcode.cn/problems/majority-element/) | **摩尔投票**：抵消不同元素，剩余候选即多数。 |
+| **双指针** | 75. 颜色分类 | [Link](https://leetcode.cn/problems/sort-colors/) | **三指针**：荷兰国旗，`0` 放左、`2` 放右、`1` 留中间 |
+| **数组** | 31. 下一个排列 | [Link](https://leetcode.cn/problems/next-permutation/) | **字典序技巧**：从右找首个下降点，交换后对后缀升序（反转）。 |
+| **双指针** | 287. 寻找重复数 | [Link](https://leetcode.cn/problems/find-the-duplicate-number/) | **快慢指针找环**：把数组视作指针映射，入环点是重复数 |
+
+
+## 位运算
+| 分类 | 题目 | 链接 | 核心解法思路 |
+| --- | --- | --- | --- |
 | **位运算** | 338. 比特位计数 | [Link](https://leetcode.cn/problems/counting-bits/) | **DP**：`dp[i]=dp[i>>1]+(i&1)` 或 `dp[i]=dp[i&(i-1)]+1`。 |
 | **位运算** | 461. 汉明距离 | [Link](https://leetcode.cn/problems/hamming-distance/) | **异或+计数**：`x^y` 后统计 1 的个数（`x&=x-1`）。 |
+
 
 
 ## 字符串
 | 分类 | 题目 | 链接 | 核心解法思路 |
 | --- | --- | --- | --- |
 | **字符串** | 647. 回文子串 | [Link](https://leetcode.cn/problems/palindromic-substrings/) | **中心扩展**：以每个中心扩展计数；或 DP 记录回文。 |
-
-## 技巧
-| 分类 | 题目 | 链接 | 核心解法思路 |
-| --- | --- | --- | --- |
-| **数组** | 31. 下一个排列 | [Link](https://leetcode.cn/problems/next-permutation/) | **字典序技巧**：从右找首个下降点，交换后对后缀升序（反转）。 |
-| **数组** | 169. 多数元素 | [Link](https://leetcode.cn/problems/majority-element/) | **摩尔投票**：抵消不同元素，剩余候选即多数。 |
-| **数组** | 448. 找到所有数组中消失的数字 | [Link](https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/) | **原地标记**：把 `nums[abs(x)-1]` 置负，未被标记的位置即缺失。 |
-| **数组** | 581. 最短无序连续子数组 | [Link](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/) | **一次扫描**：从左维护最大、从右维护最小，定位左右边界。 |
-
